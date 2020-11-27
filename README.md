@@ -27,22 +27,27 @@ airline data - all airline in US
         
 ## 3. Python Files
 
-### 3.1 app.py
+> 3.1 app.py
 
-The web application file built on Python Dash Framework. 
+>> The web application file built on Python Dash Framework.    
+    
+    
 
-### 3.2 picture_crawler.py & picture_crawler_2.py
+> 3.2 picture_crawler.py & picture_crawler_2.py
 
-Web crawler functions. Source: [Baidu Image](https://image.baidu.com/) 
+>> Web crawler functions. Source: [Baidu Image](https://image.baidu.com/)     
 
-### 3.3 distance.py
 
-Generate dataframe **distance_df_final**, which contains start airport, end airport and their distance.
-Distance is calculated by Haversine Formula.
+> 3.3 distance.py
 
-### 3.4 main.py
+>> Generate dataframe **distance_df_final**, which contains start airport, end airport and their distance.
+Distance is calculated by Haversine Formula.    
 
-**Network Analysis** to compute **the nearest path** between the start airport and the end airport **if there is no direct flight**. 
+
+> 3.4 main.py
+
+>> **Network Analysis** to compute **the nearest path** between the start airport and the end airport **if there is no direct flight**.     
+
     
         
         
