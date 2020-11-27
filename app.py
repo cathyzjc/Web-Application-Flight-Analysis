@@ -27,7 +27,7 @@ controls = dbc.Card(
                 dbc.Label("Start City"),
                 dcc.Dropdown(
                     options=[{"label": col, "value": col} for col in city_df['City']],
-                    value="San Francisco",
+                    value="Boston",
                     id="start-city"
                 ),
             ]
@@ -43,7 +43,7 @@ controls = dbc.Card(
         dbc.FormGroup(
             [
                 dbc.Label("Destination City"),
-                dcc.Dropdown(id="destination-city", value="New York"),
+                dcc.Dropdown(id="destination-city"),
             ]
         ),
 
@@ -123,6 +123,33 @@ covid = dbc.Card(
     style={"width": "35rem"},
 )
 
+city_1 = dbc.Card(
+    [
+        dbc.CardImg(id='start-city-picture', top=True),
+        dbc.CardBody(
+            [
+                html.H4(id='start-city-name', className="card-title"),
+                #dbc.Button("Go somewhere", color="primary"),
+            ]
+        ),
+    ],
+    style={"width": "52rem"},
+)
+
+
+city_2 = dbc.Card(
+    [
+        dbc.CardImg(id='destination-city-picture', top=True),
+        dbc.CardBody(
+            [
+                html.H4(id='destination-city-name', className="card-title"),
+                #dbc.Button("Go somewhere", color="primary"),
+            ]
+        ),
+    ],
+    style={"width": "52rem"},
+)
+
 
 app.layout = dbc.Container(
     [
@@ -157,6 +184,13 @@ app.layout = dbc.Container(
                 dbc.Col(airport_2, md=4),
                 dbc.Col(covid, md=4)
             ],
+            align="Top", style={'marginTop': 30, 'marginBottom': 20, 'marginLeft': 40,'marginRight': 40},
+        ),
+        dbc.Row(
+            [
+                dbc.Col(city_1, md=6),
+                dbc.Col(city_2, md=6),
+            ],
             align="Top", style={'marginTop': 30, 'marginBottom': 80, 'marginLeft': 40,'marginRight': 40},
         ),
     ],
@@ -179,7 +213,7 @@ def populate_city_controls(start_city):
 @app.callback(Output('destination-city', 'value'),
               Input('destination-city', 'options'))
 def populate_city_value(available_options):
-    return available_options[105]['value']
+    return available_options[65]['value']
 
 
 # Decide start airport by start city
@@ -212,6 +246,22 @@ def populate_city_value_end(available_options):
     return available_options[0]['value']
 
 
+# Start city picture
+@app.callback(Output('start-city-picture', 'src'),
+              Input('start-city', 'value'))
+def start_city_picture(start_city):
+    image_filename = 'graph/'+start_city+'.jpg'  # replace with your own image
+    encoded_image = base64.b64encode(open(image_filename, 'rb').read())
+    return 'data:image/png;base64,{}'.format(encoded_image.decode())
+
+
+# Destination_city city picture
+@app.callback(Output('destination-city-picture', 'src'),
+               Input('destination-city', 'value'))
+def end_city_picture(destination_city):
+    image_filename = 'graph/' + destination_city + '.jpg'  # replace with your own image
+    encoded_image = base64.b64encode(open(image_filename, 'rb').read())
+    return 'data:image/png;base64,{}'.format(encoded_image.decode())
 
 # Draw the map
 @app.callback(Output('map', 'figure'),
@@ -222,6 +272,8 @@ def populate_city_value_end(available_options):
               Output('arrival-1','children'),
               Output('arrival-2','children'),
               Output('arrival-3','children'),
+              Output('start-city-name','children'),
+              Output('destination-city-name','children'),
               Input('Submit-button', 'n_clicks'),
               Input('start-city', 'value'),
               Input('destination-city', 'value'),
@@ -337,7 +389,7 @@ def make_map(n_clicks, start_city,destination_city, start_airport, end_airport):
         arrival_2 = u'**Location**: {},  {}'.format(end_airport_city, end_airport_country)
         arrival_3 = u'**Timezone**: {},  {}'.format(end_airport_timezone_1, end_airport_timezone_2)
 
-    return fig, conclusion, departure_1, departure_2, departure_3 ,arrival_1, arrival_2, arrival_3
+    return fig, conclusion, departure_1, departure_2, departure_3 ,arrival_1, arrival_2, arrival_3, start_city, destination_city
 
 
 # Main

@@ -12,7 +12,7 @@ TRACE = False
 if TRACE:
     print('CITIES')
 city_df = pd.read_csv(CITY_DATA, header=None)
-city_df.columns = ['City', 'Latitude', 'Longitude']
+city_df.columns = ['City', 'Population', 'Latitude', 'Longitude']
 if TRACE:
     print(city_df.shape)
     print(city_df)
