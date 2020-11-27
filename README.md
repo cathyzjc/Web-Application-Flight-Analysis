@@ -27,7 +27,7 @@ airline data - all airline in US
         
 ## 3. Python Files
 
-> 3.1 app.py
+> # 3.1 app.py
 
 >> The web application file built on Python Dash Framework.    
     
