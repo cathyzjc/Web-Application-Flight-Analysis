@@ -8,11 +8,11 @@ The web application Kartemap is built using the Python Dash framework. You can e
 
 ## 1. Data Contained:
 
-city data - contained most cities who own airport in US
-city image - each city owns a unique image
-flight route data - direct flight between each airports and their distancec (calculated from airport long\lat coordinates)
-airport data - all airports located in US, also contain information about timezone, location, city etc.
-airline data - all airline in US
+1. city data - contained most cities who own airport in US
+2. city image - each city owns a unique image
+3. flight route data - direct flight between each airports and their distancec (calculated from airport long\lat coordinates)
+4. airport data - all airports located in US, also contain information about timezone, location, city etc.
+5. airline data - all airline in US
     
         
         
